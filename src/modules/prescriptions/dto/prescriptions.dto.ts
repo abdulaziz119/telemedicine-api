@@ -1,6 +1,5 @@
 import { z } from "zod"
-import { localizedTextDto } from "../../../shared/i18n/localized-text"
-import { paginationQueryDto } from "../../../shared/http/pagination"
+import {localizedTextDto, paginationQueryDto} from "../../../shared";
 
 export const prescriptionsCreateDto = z.object({
   doctor_id: z

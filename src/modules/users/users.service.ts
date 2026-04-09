@@ -1,14 +1,16 @@
-import { UserRole } from "@prisma/client"
 import { StatusCodes } from "http-status-codes"
-import { PrismaExecutor } from "../../shared/database/prisma.types"
-import { buildPaginationMeta } from "../../shared/http/pagination"
-import { AppError } from "../../shared/http/app-error"
-import { AppLanguage } from "../../shared/i18n/i18n.service"
-import { getLocalizedText } from "../../shared/i18n/localized-text"
-import { serializeAuditFields } from "../../shared/serializers/base.serializer"
-import { AuthenticatedUser } from "../auth/auth.types"
-import { UsersFindAllDto } from "./dto/users.dto"
 import { UsersRepository } from "./users.repository"
+import {UsersFindAllDto} from "./dto";
+import { UserRole, userRoles } from "./users.enum";
+import {
+  AppError,
+  AppLanguage,
+  buildPaginationMeta,
+  getLocalizedText,
+  PrismaExecutor,
+  serializeAuditFields
+} from "../../shared";
+import {AuthenticatedUser} from "../auth";
 
 export class UsersService {
   constructor(private readonly usersRepository: UsersRepository) {}
@@ -47,7 +49,7 @@ export class UsersService {
     const patient = await this.usersRepository.findActiveById(
       {
         user_id: patient_id,
-        role: UserRole.PATIENT
+        role: userRoles.PATIENT
       },
       executor
     )
@@ -63,7 +65,7 @@ export class UsersService {
     const doctor = await this.usersRepository.findActiveById(
       {
         user_id: doctor_id,
-        role: UserRole.DOCTOR
+        role: userRoles.DOCTOR
       },
       executor
     )

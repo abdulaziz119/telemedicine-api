@@ -1,10 +1,9 @@
 import { FastifyInstance } from "fastify"
 import { StatusCodes } from "http-status-codes"
-import { AuthService } from "../auth/auth.service"
-import { getRequestLanguage } from "../../shared/http/request-language"
-import { parseDto } from "../../shared/http/validation"
-import { doctorsFindAllDto, doctorsGetOneDto } from "./dto/doctors.dto"
 import { DoctorsService } from "./doctors.service"
+import {AuthService} from "../auth";
+import {doctorsFindAllDto, doctorsGetOneDto} from "./dto";
+import {getRequestLanguage, parseDto} from "../../shared";
 
 export class DoctorsController {
 

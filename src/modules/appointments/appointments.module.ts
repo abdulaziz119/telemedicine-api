@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client"
-import { AuthService } from "../auth/auth.service"
-import { UsersService } from "../users/users.service"
 import { AppointmentsController } from "./appointments.controller"
 import { AppointmentsRepository } from "./appointments.repository"
 import { AppointmentsService } from "./appointments.service"
+import {UsersService} from "../users";
+import {AuthService} from "../auth";
 
 export function buildAppointmentsModule(prisma: PrismaClient, usersService: UsersService, authService: AuthService) {
   const repository = new AppointmentsRepository(prisma)

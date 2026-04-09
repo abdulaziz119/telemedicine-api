@@ -1,14 +1,9 @@
 import { FastifyInstance } from "fastify"
 import { StatusCodes } from "http-status-codes"
-import { AuthService } from "../auth/auth.service"
-import { parseDto } from "../../shared/http/validation"
-import {
-  appointmentsCompleteDto,
-  appointmentsCreateDto,
-  appointmentsFindAllDto,
-  appointmentsParamsDto
-} from "./dto/appointments.dto"
 import { AppointmentsService } from "./appointments.service"
+import {AuthService} from "../auth";
+import {parseDto} from "../../shared";
+import {appointmentsFindAllDto,appointmentsParamsDto,appointmentsCreateDto,appointmentsCompleteDto} from "./dto";
 
 export class AppointmentsController {
 

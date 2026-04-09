@@ -1,10 +1,10 @@
-import { UserRole } from "@prisma/client"
 import { z } from "zod"
-import { paginationQueryDto } from "../../../shared/http/pagination"
+import {paginationQueryDto} from "../../../shared";
+import { userRoles } from "../users.enum";
 
 export const usersFindAllDto = paginationQueryDto.extend({
   role: z
-    .nativeEnum(UserRole, {
+    .nativeEnum(userRoles, {
       invalid_type_error: "users.validation.dto.roleInvalid"
     })
     .optional()
@@ -17,7 +17,7 @@ export const usersFindByIdDto = z.object({
     })
     .trim()
     .min(1, "users.validation.dto.userIdRequired"),
-  role: z.nativeEnum(UserRole, {
+  role: z.nativeEnum(userRoles, {
     invalid_type_error: "users.validation.dto.roleInvalid"
   }).optional()
 })

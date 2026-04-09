@@ -1,8 +1,9 @@
 import "dotenv/config";
 
-import { Prisma, PrismaClient, UserRole } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { createLocalizedText } from "../src/shared/i18n/localized-text";
 import { hashPassword } from "../src/shared/auth/password";
+import { userRoles } from "../src/modules/users/users.enum";
 
 const prisma = new PrismaClient();
 
@@ -26,7 +27,7 @@ async function main() {
     where: { email: "doctor.cardiology@example.com" },
     update: {
       full_name: "Dr. Alice Karimova",
-      role: UserRole.DOCTOR,
+      role: userRoles.DOCTOR,
       password_hash: doctorPasswordHash,
       doctor_profile: {
         upsert: {
@@ -44,7 +45,7 @@ async function main() {
     create: {
       email: "doctor.cardiology@example.com",
       full_name: "Dr. Alice Karimova",
-      role: UserRole.DOCTOR,
+      role: userRoles.DOCTOR,
       password_hash: doctorPasswordHash,
       doctor_profile: {
         create: {
@@ -59,7 +60,7 @@ async function main() {
     where: { email: "doctor.neurology@example.com" },
     update: {
       full_name: "Dr. Bekzod Tursunov",
-      role: UserRole.DOCTOR,
+      role: userRoles.DOCTOR,
       password_hash: doctorPasswordHash,
       doctor_profile: {
         upsert: {
@@ -77,7 +78,7 @@ async function main() {
     create: {
       email: "doctor.neurology@example.com",
       full_name: "Dr. Bekzod Tursunov",
-      role: UserRole.DOCTOR,
+      role: userRoles.DOCTOR,
       password_hash: doctorPasswordHash,
       doctor_profile: {
         create: {
@@ -92,13 +93,13 @@ async function main() {
     where: { email: "patient@example.com" },
     update: {
       full_name: "Jasur Patient",
-      role: UserRole.PATIENT,
+      role: userRoles.PATIENT,
       password_hash: patientPasswordHash
     },
     create: {
       email: "patient@example.com",
       full_name: "Jasur Patient",
-      role: UserRole.PATIENT,
+      role: userRoles.PATIENT,
       password_hash: patientPasswordHash
     }
   });

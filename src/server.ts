@@ -1,6 +1,6 @@
 import "dotenv/config"
 import { buildApp } from "./app"
-import { env } from "./shared/config/env"
+import {env} from "./shared";
 
 const app = buildApp()
 

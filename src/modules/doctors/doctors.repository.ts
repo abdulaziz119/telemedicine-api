@@ -1,6 +1,7 @@
-import { Prisma, PrismaClient, UserRole } from "@prisma/client"
-import { getPaginationParams } from "../../shared/http/pagination"
-import { DoctorsFindAllDto } from "./dto/doctors.dto"
+import { Prisma, PrismaClient } from "@prisma/client"
+import {DoctorsFindAllDto} from "./dto";
+import {getPaginationParams} from "../../shared";
+import { userRoles } from "../users/users.enum";
 
 export class DoctorsRepository {
 
@@ -50,7 +51,7 @@ export class DoctorsRepository {
     return this.prisma.user.findFirst({
       where: {
         id: doctor_id,
-        role: UserRole.DOCTOR,
+        role: userRoles.DOCTOR,
         deleted_at: null,
         doctor_profile: {
           is: {
@@ -85,7 +86,7 @@ export class DoctorsRepository {
 
   private buildWhere(query: Pick<DoctorsFindAllDto, "specialization">) {
     return {
-      role: UserRole.DOCTOR,
+      role: userRoles.DOCTOR,
       deleted_at: null,
       doctor_profile: query.specialization
         ? {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { AppointmentStatus, Prisma, PrismaClient, UserRole } from "@prisma/client"
+import { AppointmentStatus, Prisma, PrismaClient } from "@prisma/client"
 import { StatusCodes } from "http-status-codes"
 import { AppError } from "../../../src/shared/http/app-error"
 import { AppointmentsRepository } from "../../../src/modules/appointments/appointments.repository"
@@ -7,13 +7,14 @@ import { AppointmentsService } from "../../../src/modules/appointments/appointme
 import { AppointmentsCreateDto } from "../../../src/modules/appointments/dto/appointments.dto"
 import { AuthService } from "../../../src/modules/auth/auth.service"
 import { AuthenticatedUser } from "../../../src/modules/auth/auth.types"
+import { UserRole, userRoles } from "../../../src/modules/users/users.enum"
 import { UsersService } from "../../../src/modules/users/users.service"
 
 function buildCurrentUser(role: UserRole, overrides: Partial<AuthenticatedUser> = {}): AuthenticatedUser {
   return {
-    id: role === UserRole.DOCTOR ? "doctor-1" : "patient-1",
-    email: role === UserRole.DOCTOR ? "doctor@example.com" : "patient@example.com",
-    full_name: role === UserRole.DOCTOR ? "Doctor User" : "Patient User",
+    id: role === userRoles.DOCTOR ? "doctor-1" : "patient-1",
+    email: role === userRoles.DOCTOR ? "doctor@example.com" : "patient@example.com",
+    full_name: role === userRoles.DOCTOR ? "Doctor User" : "Patient User",
     role,
     ...overrides
   }
@@ -70,14 +71,14 @@ function createAuthServiceMock(calls: {
     ensureDoctor(user: AuthenticatedUser) {
       calls.ensureDoctor.push(user)
 
-      if (user.role !== UserRole.DOCTOR) {
+      if (user.role !== userRoles.DOCTOR) {
         throw new AppError(StatusCodes.FORBIDDEN, "ONLY_DOCTORS_ALLOWED", "auth.errors.service.onlyDoctorsAllowed")
       }
     },
     ensurePatient(user: AuthenticatedUser) {
       calls.ensurePatient.push(user)
 
-      if (user.role !== UserRole.PATIENT) {
+      if (user.role !== userRoles.PATIENT) {
         throw new AppError(
           StatusCodes.FORBIDDEN,
           "ONLY_PATIENTS_ALLOWED",
@@ -256,7 +257,7 @@ describe("AppointmentsService.createAppointment", () => {
   it("rejects when a doctor tries to create an appointment for a patient", async () => {
     const { service, calls } = createSubject()
 
-    await expect(service.createAppointment(buildCreateDto(), buildCurrentUser(UserRole.DOCTOR))).rejects.toMatchObject({
+    await expect(service.createAppointment(buildCreateDto(), buildCurrentUser(userRoles.DOCTOR))).rejects.toMatchObject({
       errorCode: "ONLY_PATIENTS_ALLOWED"
     })
 
@@ -272,7 +273,7 @@ describe("AppointmentsService.createAppointment", () => {
         buildCreateDto({
           patient_id: "patient-2"
         }),
-        buildCurrentUser(UserRole.PATIENT)
+        buildCurrentUser(userRoles.PATIENT)
       )
     ).rejects.toMatchObject({
       errorCode: "PATIENT_ID_FORBIDDEN"
@@ -281,7 +282,7 @@ describe("AppointmentsService.createAppointment", () => {
     expect(calls.auth.actorChecks).toEqual([
       {
         actorId: "patient-2",
-        user: buildCurrentUser(UserRole.PATIENT),
+        user: buildCurrentUser(userRoles.PATIENT),
         mismatch: "patient"
       }
     ])
@@ -295,7 +296,7 @@ describe("AppointmentsService.createAppointment", () => {
       ends_at: new Date(Date.now() + 60 * 60 * 1000)
     })
 
-    await expect(service.createAppointment(input, buildCurrentUser(UserRole.PATIENT))).rejects.toMatchObject({
+    await expect(service.createAppointment(input, buildCurrentUser(userRoles.PATIENT))).rejects.toMatchObject({
       errorCode: "APPOINTMENT_IN_PAST"
     })
 
@@ -310,7 +311,7 @@ describe("AppointmentsService.createAppointment", () => {
       ends_at: starts_at
     })
 
-    await expect(service.createAppointment(input, buildCurrentUser(UserRole.PATIENT))).rejects.toMatchObject({
+    await expect(service.createAppointment(input, buildCurrentUser(userRoles.PATIENT))).rejects.toMatchObject({
       errorCode: "APPOINTMENT_INVALID_RANGE"
     })
 
@@ -325,7 +326,7 @@ describe("AppointmentsService.createAppointment", () => {
     })
     const input = buildCreateDto()
 
-    await expect(service.createAppointment(input, buildCurrentUser(UserRole.PATIENT))).rejects.toMatchObject({
+    await expect(service.createAppointment(input, buildCurrentUser(userRoles.PATIENT))).rejects.toMatchObject({
       errorCode: "APPOINTMENT_SLOT_BUSY"
     })
 
@@ -344,7 +345,7 @@ describe("AppointmentsService.createAppointment", () => {
     })
     const input = buildCreateDto()
 
-    await expect(service.createAppointment(input, buildCurrentUser(UserRole.PATIENT))).rejects.toMatchObject({
+    await expect(service.createAppointment(input, buildCurrentUser(userRoles.PATIENT))).rejects.toMatchObject({
       errorCode: "APPOINTMENT_PATIENT_BUSY"
     })
 
@@ -358,7 +359,7 @@ describe("AppointmentsService.createAppointment", () => {
   it("stores audit actor ids when creating an appointment", async () => {
     const { service, calls, transactionClient } = createSubject()
     const input = buildCreateDto()
-    const currentUser = buildCurrentUser(UserRole.PATIENT)
+    const currentUser = buildCurrentUser(userRoles.PATIENT)
 
     const appointment = await service.createAppointment(input, currentUser)
 
@@ -419,7 +420,7 @@ describe("AppointmentsService.completeAppointment", () => {
     const { service, calls } = createSubject()
 
     await expect(
-      service.completeAppointment("appointment-1", { doctor_id: "doctor-1" }, buildCurrentUser(UserRole.PATIENT))
+      service.completeAppointment("appointment-1", { doctor_id: "doctor-1" }, buildCurrentUser(userRoles.PATIENT))
     ).rejects.toMatchObject({
       errorCode: "ONLY_DOCTORS_ALLOWED"
     })
@@ -435,7 +436,7 @@ describe("AppointmentsService.completeAppointment", () => {
       service.completeAppointment(
         "appointment-1",
         { doctor_id: "doctor-2" },
-        buildCurrentUser(UserRole.DOCTOR)
+        buildCurrentUser(userRoles.DOCTOR)
       )
     ).rejects.toMatchObject({
       errorCode: "DOCTOR_ID_FORBIDDEN"
@@ -444,7 +445,7 @@ describe("AppointmentsService.completeAppointment", () => {
     expect(calls.auth.actorChecks).toEqual([
       {
         actorId: "doctor-2",
-        user: buildCurrentUser(UserRole.DOCTOR),
+        user: buildCurrentUser(userRoles.DOCTOR),
         mismatch: "doctor"
       }
     ])
@@ -462,7 +463,7 @@ describe("AppointmentsService.completeAppointment", () => {
     const appointment = await service.completeAppointment(
       "appointment-1",
       { doctor_id: "doctor-1" },
-      buildCurrentUser(UserRole.DOCTOR)
+      buildCurrentUser(userRoles.DOCTOR)
     )
 
     expect(calls.activeLookups[0]).toEqual({

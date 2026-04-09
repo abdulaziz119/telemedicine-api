@@ -1,15 +1,9 @@
 import { FastifyInstance } from "fastify"
 import { StatusCodes } from "http-status-codes"
-import { AuthService } from "../auth/auth.service"
-import { getRequestLanguage } from "../../shared/http/request-language"
-import { parseDto } from "../../shared/http/validation"
-import {
-  prescriptionsCreateDto,
-  prescriptionsFindAllDto,
-  prescriptionsGetOneDto,
-  prescriptionsParamsDto
-} from "./dto/prescriptions.dto"
 import { PrescriptionsService } from "./prescriptions.service"
+import {AuthService} from "../auth";
+import {getRequestLanguage, parseDto} from "../../shared";
+import {prescriptionsCreateDto, prescriptionsFindAllDto, prescriptionsGetOneDto, prescriptionsParamsDto} from "./dto";
 
 export class PrescriptionsController {
 

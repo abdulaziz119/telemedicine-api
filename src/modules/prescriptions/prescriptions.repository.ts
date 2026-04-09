@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client"
-import { PrismaExecutor } from "../../shared/database/prisma.types"
-import { getPaginationParams } from "../../shared/http/pagination"
-import { PrescriptionsCreateDto, PrescriptionsFindAllDto } from "./dto/prescriptions.dto"
+import {PrescriptionsCreateDto, PrescriptionsFindAllDto} from "./dto";
+import {getPaginationParams, PrismaExecutor} from "../../shared";
 
 export class PrescriptionsRepository {
   constructor(private readonly prisma: PrismaClient) {}

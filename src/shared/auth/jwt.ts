@@ -1,5 +1,5 @@
 import { createHmac, timingSafeEqual } from "node:crypto"
-import { UserRole } from "@prisma/client"
+import { UserRole, userRoles } from "../../modules/users/users.enum"
 
 type JwtHeader = {
   alg: "HS256"
@@ -43,7 +43,7 @@ function isAccessTokenPayload(payload: unknown): payload is AccessTokenPayload {
   return (
     typeof candidate.sub === "string" &&
     typeof candidate.email === "string" &&
-    (candidate.role === UserRole.DOCTOR || candidate.role === UserRole.PATIENT) &&
+    (candidate.role === userRoles.DOCTOR || candidate.role === userRoles.PATIENT) &&
     typeof candidate.iat === "number" &&
     typeof candidate.exp === "number"
   )

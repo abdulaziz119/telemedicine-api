@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify"
 import { StatusCodes } from "http-status-codes"
-import { parseDto } from "../../shared/http/validation"
 import { AuthService } from "./auth.service"
-import { authLoginDto } from "./dto/auth.dto"
+import {authLoginDto} from "./dto";
+import {parseDto} from "../../shared";
 
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

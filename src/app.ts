@@ -3,11 +3,7 @@ import Fastify, { FastifyInstance, FastifyServerOptions } from "fastify"
 import { PrismaClient } from "@prisma/client"
 import { Logger, LogFn } from "pino"
 import { registerAppModules } from "./app.module"
-import { fastifyCorsOptions } from "./shared/config/cors.config"
-import { env } from "./shared/config/env"
-import { registerGlobalErrorHandler } from "./shared/http/error-handler"
-import { I18nService } from "./shared/i18n/i18n.service"
-import { prisma } from "./shared/database/prisma.client"
+import {env, fastifyCorsOptions, I18nService, prisma, registerGlobalErrorHandler} from "./shared";
 
 function filterFastifyStartupLogs(this: Logger, args: Parameters<LogFn>, method: LogFn): void {
   const [message] = args

@@ -1,12 +1,10 @@
-import { PrismaClient, UserRole } from "@prisma/client"
+import { PrismaClient } from "@prisma/client"
 import { FastifyRequest } from "fastify"
 import { StatusCodes } from "http-status-codes"
-import { env } from "../../shared/config/env"
-import { createAccessToken, verifyAccessToken } from "../../shared/auth/jwt"
-import { verifyPassword } from "../../shared/auth/password"
-import { AppError } from "../../shared/http/app-error"
-import { AuthenticatedUser } from "./auth.types"
-import { AuthLoginDto } from "./dto/auth.dto"
+import {AuthLoginDto} from "./dto";
+import {AppError, createAccessToken, env, verifyAccessToken, verifyPassword} from "../../shared";
+import {AuthenticatedUser} from "./auth.types";
+import { UserRole, userRoles } from "../users/users.enum";
 
 function getBearerToken(request: FastifyRequest) {
   const authorizationHeader = request.headers.authorization
@@ -110,7 +108,7 @@ export class AuthService {
   }
 
   ensureDoctor(user: AuthenticatedUser) {
-    if (user.role !== UserRole.DOCTOR) {
+    if (user.role !== userRoles.DOCTOR) {
       throw new AppError(
         StatusCodes.FORBIDDEN,
         "ONLY_DOCTORS_ALLOWED",
@@ -120,7 +118,7 @@ export class AuthService {
   }
 
   ensurePatient(user: AuthenticatedUser) {
-    if (user.role !== UserRole.PATIENT) {
+    if (user.role !== userRoles.PATIENT) {
       throw new AppError(
         StatusCodes.FORBIDDEN,
         "ONLY_PATIENTS_ALLOWED",

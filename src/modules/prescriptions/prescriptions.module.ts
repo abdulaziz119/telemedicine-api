@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client"
-import { AppointmentsRepository } from "../appointments/appointments.repository"
-import { AuthService } from "../auth/auth.service"
 import { PrescriptionsController } from "./prescriptions.controller"
 import { PrescriptionsRepository } from "./prescriptions.repository"
 import { PrescriptionsService } from "./prescriptions.service"
+import {AppointmentsRepository} from "../appointments";
+import {AuthService} from "../auth";
 
 export function buildPrescriptionsModule(
   prisma: PrismaClient,

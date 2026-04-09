@@ -1,15 +1,18 @@
 import { AppointmentStatus, PrismaClient } from "@prisma/client"
 import { StatusCodes } from "http-status-codes"
-import { buildPaginationMeta } from "../../shared/http/pagination"
-import { AppError } from "../../shared/http/app-error"
-import { AppLanguage } from "../../shared/i18n/i18n.service"
-import { getLocalizedText } from "../../shared/i18n/localized-text"
-import { serializeAuditFields, serializeDate } from "../../shared/serializers/base.serializer"
-import { AppointmentsRepository } from "../appointments/appointments.repository"
-import { AuthService } from "../auth/auth.service"
-import { AuthenticatedUser } from "../auth/auth.types"
-import { PrescriptionsCreateDto, PrescriptionsFindAllDto } from "./dto/prescriptions.dto"
 import { PrescriptionsRepository } from "./prescriptions.repository"
+import {AppointmentsRepository} from "../appointments";
+import {AuthenticatedUser, AuthService} from "../auth";
+import {PrescriptionsCreateDto, PrescriptionsFindAllDto} from "./dto";
+import { userRoles } from "../users/users.enum";
+import {
+  AppError,
+  AppLanguage,
+  buildPaginationMeta,
+  getLocalizedText,
+  serializeAuditFields,
+  serializeDate
+} from "../../shared";
 
 export class PrescriptionsService {
   constructor(
@@ -20,7 +23,7 @@ export class PrescriptionsService {
   ) {}
 
   async findAll(query: PrescriptionsFindAllDto, language: AppLanguage, currentUser: AuthenticatedUser) {
-    const scopedQuery = currentUser.role === "DOCTOR"
+    const scopedQuery = currentUser.role === userRoles.DOCTOR
       ? {
           ...query,
           doctor_id: currentUser.id
@@ -46,8 +49,8 @@ export class PrescriptionsService {
 
     if (
       !prescription ||
-      (currentUser.role === "DOCTOR" && prescription.doctor_id !== currentUser.id) ||
-      (currentUser.role === "PATIENT" && prescription.patient_id !== currentUser.id)
+      (currentUser.role === userRoles.DOCTOR && prescription.doctor_id !== currentUser.id) ||
+      (currentUser.role === userRoles.PATIENT && prescription.patient_id !== currentUser.id)
     ) {
       throw new AppError(
         StatusCodes.NOT_FOUND,

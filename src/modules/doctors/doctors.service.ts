@@ -1,11 +1,7 @@
 import { StatusCodes } from "http-status-codes"
-import { buildPaginationMeta } from "../../shared/http/pagination"
-import { AppError } from "../../shared/http/app-error"
-import { AppLanguage } from "../../shared/i18n/i18n.service"
-import { getLocalizedText } from "../../shared/i18n/localized-text"
-import { DoctorsRepository } from "./doctors.repository"
-import { serializeAuditFields } from "../../shared/serializers/base.serializer"
-import { DoctorsFindAllDto } from "./dto/doctors.dto"
+import {AppError, AppLanguage, buildPaginationMeta, getLocalizedText, serializeAuditFields} from "../../shared";
+import {DoctorsFindAllDto} from "./dto";
+import {DoctorsRepository} from "./doctors.repository";
 
 export class DoctorsService {
 

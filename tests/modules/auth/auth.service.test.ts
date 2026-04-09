@@ -1,14 +1,15 @@
 import { describe, expect, it } from "vitest"
-import { PrismaClient, UserRole } from "@prisma/client"
+import { PrismaClient } from "@prisma/client"
 import { hashPassword } from "../../../src/shared/auth/password"
 import { AuthService } from "../../../src/modules/auth/auth.service"
+import { userRoles } from "../../../src/modules/users/users.enum"
 
 function createSubject(storedPasswordHash: string | null) {
   const user = {
     id: "doctor-1",
     email: "doctor@example.com",
     full_name: "Doctor User",
-    role: UserRole.DOCTOR,
+    role: userRoles.DOCTOR,
     password_hash: storedPasswordHash
   }
 
@@ -47,7 +48,7 @@ describe("AuthService", () => {
       id: "doctor-1",
       email: "doctor@example.com",
       full_name: "Doctor User",
-      role: UserRole.DOCTOR
+      role: userRoles.DOCTOR
     })
   })
 
@@ -81,7 +82,7 @@ describe("AuthService", () => {
       id: "doctor-1",
       email: "doctor@example.com",
       full_name: "Doctor User",
-      role: UserRole.DOCTOR
+      role: userRoles.DOCTOR
     })
   })
 })

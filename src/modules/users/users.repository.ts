@@ -1,7 +1,6 @@
 import { Prisma, PrismaClient } from "@prisma/client"
-
-import { PrismaExecutor } from "../../shared/database/prisma.types"
-import { UsersFindByIdDto } from "./dto/users.dto"
+import {UsersFindByIdDto} from "./dto";
+import {PrismaExecutor} from "../../shared";
 
 export class UsersRepository {
   constructor(private readonly prisma: PrismaClient) {}

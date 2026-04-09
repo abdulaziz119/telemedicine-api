@@ -1,5 +1,5 @@
 import { FastifyRequest } from "fastify"
-import { AppLanguage, defaultLanguage, supportedLanguages } from "../i18n/i18n.service"
+import {AppLanguage, defaultLanguage, supportedLanguages} from "../i18n";
 
 function normalizeLanguage(rawValue: string | undefined): AppLanguage {
   if (!rawValue) {

@@ -1,17 +1,10 @@
 import { AppointmentStatus, Prisma, PrismaClient } from "@prisma/client"
 import { StatusCodes } from "http-status-codes"
-import { buildPaginationMeta } from "../../shared/http/pagination"
-import { AppError } from "../../shared/http/app-error"
-import { serializeAuditFields, serializeDate, serializeNullableDate } from "../../shared/serializers/base.serializer"
-import {
-  AppointmentsCompleteDto,
-  AppointmentsCreateDto,
-  AppointmentsFindAllDto
-} from "./dto/appointments.dto"
 import { AppointmentsRepository } from "./appointments.repository"
-import { AuthService } from "../auth/auth.service"
-import { AuthenticatedUser } from "../auth/auth.types"
-import { UsersService } from "../users/users.service"
+import {userRoles, UsersService} from "../users";
+import {AuthenticatedUser, AuthService} from "../auth";
+import {AppointmentsCompleteDto, AppointmentsCreateDto, AppointmentsFindAllDto} from "./dto";
+import {AppError, buildPaginationMeta, serializeAuditFields, serializeDate, serializeNullableDate} from "../../shared";
 
 export class AppointmentsService {
   constructor(
@@ -22,7 +15,7 @@ export class AppointmentsService {
   ) {}
 
   async findAll(query: AppointmentsFindAllDto, currentUser: AuthenticatedUser) {
-    const scopedQuery = currentUser.role === "DOCTOR"
+    const scopedQuery = currentUser.role === userRoles.DOCTOR
       ? {
           ...query,
           doctor_id: currentUser.id
@@ -48,8 +41,8 @@ export class AppointmentsService {
 
     if (
       !appointment ||
-      (currentUser.role === "DOCTOR" && appointment.doctor_id !== currentUser.id) ||
-      (currentUser.role === "PATIENT" && appointment.patient_id !== currentUser.id)
+      (currentUser.role === userRoles.DOCTOR && appointment.doctor_id !== currentUser.id) ||
+      (currentUser.role === userRoles.PATIENT && appointment.patient_id !== currentUser.id)
     ) {
       throw new AppError(
         StatusCodes.NOT_FOUND,

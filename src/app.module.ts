@@ -1,10 +1,12 @@
 import { FastifyInstance } from "fastify"
 import { PrismaClient } from "@prisma/client"
-import { buildAuthModule } from "./modules/auth/auth.module"
-import { buildAppointmentsModule } from "./modules/appointments/appointments.module"
-import { buildDoctorsModule } from "./modules/doctors/doctors.module"
-import { buildPrescriptionsModule } from "./modules/prescriptions/prescriptions.module"
-import { buildUsersModule } from "./modules/users/users.module"
+import {
+  buildAppointmentsModule,
+  buildAuthModule,
+  buildDoctorsModule,
+  buildPrescriptionsModule,
+  buildUsersModule
+} from "./modules";
 
 export function registerAppModules(app: FastifyInstance, prisma: PrismaClient):void {
   const authModule = buildAuthModule(prisma)

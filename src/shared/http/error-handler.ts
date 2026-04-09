@@ -2,9 +2,9 @@ import { Prisma } from "@prisma/client"
 import { FastifyError, FastifyInstance } from "fastify"
 import { ReasonPhrases, StatusCodes, getReasonPhrase } from "http-status-codes"
 import { ZodError, ZodIssue } from "zod"
-import { I18nService } from "../i18n/i18n.service"
 import { AppError } from "./app-error"
 import { getRequestLanguage } from "./request-language"
+import {I18nService} from "../i18n";
 
 const prismaConstraintErrors = {
   appointments_doctor_schedule_no_overlap: new AppError(

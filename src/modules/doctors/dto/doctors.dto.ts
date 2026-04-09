@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { paginationQueryDto } from "../../../shared/http/pagination"
+import {paginationQueryDto} from "../../../shared";
 
 export const doctorsFindAllDto = paginationQueryDto.extend({
   specialization: z

@@ -1,8 +1,7 @@
 import { AppointmentStatus, PrismaClient } from "@prisma/client"
-import { PrismaExecutor } from "../../shared/database/prisma.types"
-import { getPaginationParams } from "../../shared/http/pagination"
-import { AppointmentsCreateDto, AppointmentsFindAllDto } from "./dto/appointments.dto"
 import { buildScheduledAppointmentConflictWhere } from "./appointments.time"
+import {AppointmentsCreateDto, AppointmentsFindAllDto} from "./dto";
+import {getPaginationParams, PrismaExecutor} from "../../shared";
 
 export class AppointmentsRepository {
   constructor(private readonly prisma: PrismaClient) {}

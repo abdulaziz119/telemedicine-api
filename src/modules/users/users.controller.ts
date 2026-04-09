@@ -1,11 +1,9 @@
 import { FastifyInstance } from "fastify"
 import { StatusCodes } from "http-status-codes"
-import { AuthService } from "../auth/auth.service"
-import { getRequestLanguage } from "../../shared/http/request-language"
-import { parseDto } from "../../shared/http/validation"
-import { usersFindAllDto, usersGetOneDto } from "./dto/users.dto"
-
 import { UsersService } from "./users.service"
+import {AuthService} from "../auth";
+import {getRequestLanguage, parseDto} from "../../shared";
+import {usersFindAllDto, usersGetOneDto} from "./dto";
 
 export class UsersController {
   constructor(

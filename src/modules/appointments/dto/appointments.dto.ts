@@ -1,7 +1,6 @@
 import { AppointmentStatus } from "@prisma/client"
 import { z } from "zod"
-
-import { paginationQueryDto } from "../../../shared/http/pagination"
+import {paginationQueryDto} from "../../../shared";
 
 export const appointmentsCreateDto = z.object({
   patient_id: z
