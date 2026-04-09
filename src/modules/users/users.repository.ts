@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient } from "@prisma/client"
-import {UsersFindByIdDto} from "./dto";
+import {UsersFindAllDto, UsersFindByIdDto} from "./dto";
 import {PrismaExecutor} from "../../shared";
 
 export class UsersRepository {
@@ -41,5 +41,52 @@ export class UsersRepository {
         }
       }
     })
+  }
+
+  async findAll(data: UsersFindAllDto, executor: PrismaExecutor = this.prisma) {
+    const where: Prisma.UserWhereInput = {
+      deleted_at: null
+    }
+
+    if (data.role) {
+      where.role = data.role
+    }
+
+    const [users, total] = await Promise.all([
+      executor.user.findMany({
+        where,
+        take: data.limit,
+        skip: (data.page - 1) * data.limit,
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          email: true,
+          full_name: true,
+          role: true,
+          created_by: true,
+          updated_by: true,
+          created_at: true,
+          updated_at: true,
+          deleted_at: true,
+          doctor_profile: {
+            select: {
+              id: true,
+              specialization: true,
+              consultation_fee: true,
+              created_by: true,
+              updated_by: true,
+              created_at: true,
+              updated_at: true,
+              deleted_at: true
+            }
+          }
+        }
+      }),
+      executor.user.count({ where })
+    ])
+
+    return { users, total }
   }
 }

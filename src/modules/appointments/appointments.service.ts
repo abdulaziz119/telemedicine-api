@@ -146,20 +146,65 @@ export class AppointmentsService {
       if (currentAppointment.status === AppointmentStatus.CANCELLED) {
         throw new AppError(
           StatusCodes.CONFLICT,
-          "APPOINTMENT_CANCELLED_CANNOT_COMPLETE",
-          "appointments.errors.service.appointmentCancelledCannotComplete"
+          "APPOINTMENT_ALREADY_CANCELLED",
+          "appointments.errors.service.appointmentAlreadyCancelled"
         )
       }
 
       if (currentAppointment.status === AppointmentStatus.COMPLETED) {
         throw new AppError(
           StatusCodes.CONFLICT,
-          "APPOINTMENT_ALREADY_COMPLETED",
-          "appointments.errors.service.appointmentAlreadyCompleted"
+          "APPOINTMENT_ALREADY_COMPLETED_CANNOT_CANCEL",
+          "appointments.errors.service.appointmentAlreadyCompletedCannotCancel"
         )
       }
 
       return this.appointmentsRepository.markAsCompleted(transactionClient, appointment_id, currentUser.id)
+    })
+
+    return this.serializeAppointment(appointment)
+  }
+
+  async cancelAppointment(appointment_id: string, currentUser: AuthenticatedUser) {
+    const appointment = await this.prisma.$transaction(async (transactionClient) => {
+      const currentAppointment = await this.appointmentsRepository.findActiveById(transactionClient, appointment_id)
+
+      if (!currentAppointment) {
+        throw new AppError(
+          StatusCodes.NOT_FOUND,
+          "APPOINTMENT_NOT_FOUND",
+          "appointments.errors.service.appointmentNotFound"
+        )
+      }
+
+      if (
+        currentAppointment.doctor_id !== currentUser.id &&
+        currentAppointment.patient_id !== currentUser.id
+      ) {
+        throw new AppError(
+          StatusCodes.FORBIDDEN,
+          "CANNOT_CANCEL_OTHERS_APPOINTMENT",
+          "appointments.errors.service.cannotCancelOthersAppointment"
+        )
+      }
+
+      if (currentAppointment.status === AppointmentStatus.CANCELLED) {
+        throw new AppError(
+          StatusCodes.CONFLICT,
+          "APPOINTMENT_ALREADY_CANCELLED",
+          "appointments.errors.service.appointmentAlreadyCancelled"
+        )
+      }
+
+      if (currentAppointment.status === AppointmentStatus.COMPLETED) {
+        throw new AppError(
+          StatusCodes.CONFLICT,
+          "APPOINTMENT_COMPLETED_CANNOT_CANCEL",
+          "appointments.errors.service.appointmentCompletedCannotCancel"
+        )
+      }
+
+      return this.appointmentsRepository.markAsCancelled(transactionClient, appointment_id, currentUser.id)
     })
 
     return this.serializeAppointment(appointment)

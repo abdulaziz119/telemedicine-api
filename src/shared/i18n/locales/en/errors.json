@@ -40,7 +40,11 @@
       "appointmentSlotBusy": "The selected time slot is already occupied.",
       "appointmentPatientBusy": "The patient already has another appointment at this time.",
       "appointmentAlreadyCompleted": "Appointment is already completed.",
-      "appointmentCancelledCannotComplete": "A cancelled appointment cannot be completed."
+      "appointmentCancelledCannotComplete": "A cancelled appointment cannot be completed.",
+      "appointmentAlreadyCancelled": "Appointment is already cancelled.",
+      "appointmentCompletedCannotCancel": "A completed appointment cannot be cancelled.",
+      "appointmentAlreadyCompletedCannotCancel": "A completed appointment cannot be cancelled.",
+      "cannotCancelOthersAppointment": "You can only cancel your own appointments."
     }
   },
   "prescriptions": {

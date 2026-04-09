@@ -17,12 +17,7 @@ export class UsersService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
   async findAll(query: UsersFindAllDto, language: AppLanguage, currentUser: AuthenticatedUser) {
-    const user = await this.usersRepository.findActiveById({
-      user_id: currentUser.id,
-      ...(query.role ? { role: query.role } : {})
-    })
-    const users = user ? [user] : []
-    const total: number = users.length
+    const { users, total } = await this.usersRepository.findAll(query)
 
     return {
       data: users.map((user) => this.serializeUser(user, language)),

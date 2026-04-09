@@ -51,5 +51,15 @@ export class AppointmentsController {
         data: appointment
       })
     })
+
+    app.put("/appointments/:id/cancel", async (request, reply) => {
+      const currentUser = await this.authService.authenticateRequest(request)
+      const params = parseDto(appointmentsParamsDto, request.params)
+      const appointment = await this.appointmentsService.cancelAppointment(params.id, currentUser)
+
+      return reply.status(StatusCodes.OK).send({
+        data: appointment
+      })
+    })
   }
 }

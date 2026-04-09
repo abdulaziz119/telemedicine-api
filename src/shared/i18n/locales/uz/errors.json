@@ -40,7 +40,11 @@
       "appointmentSlotBusy": "Tanlangan vaqt band.",
       "appointmentPatientBusy": "Bemor tanlangan vaqtda boshqa qabulga yozilgan.",
       "appointmentAlreadyCompleted": "Qabul allaqachon yakunlangan.",
-      "appointmentCancelledCannotComplete": "Bekor qilingan qabulni yakunlab bo'lmaydi."
+      "appointmentCancelledCannotComplete": "Bekor qilingan qabulni yakunlab bo'lmaydi.",
+      "appointmentAlreadyCancelled": "Qabul allaqachon bekor qilingan.",
+      "appointmentCompletedCannotCancel": "Yakunlangan qabulni bekor qilib bo'lmaydi.",
+      "appointmentAlreadyCompletedCannotCancel": "Yakunlangan qabulni bekor qilib bo'lmaydi.",
+      "cannotCancelOthersAppointment": "Siz faqat o'zingizga tegishli qabulni bekor qilishingiz mumkin."
     }
   },
   "prescriptions": {

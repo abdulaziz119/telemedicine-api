@@ -40,7 +40,11 @@
       "appointmentSlotBusy": "Выбранное время уже занято.",
       "appointmentPatientBusy": "У пациента уже есть другой прием на это время.",
       "appointmentAlreadyCompleted": "Прием уже завершен.",
-      "appointmentCancelledCannotComplete": "Отмененный прием нельзя завершить."
+      "appointmentCancelledCannotComplete": "Отмененный прием нельзя завершить.",
+      "appointmentAlreadyCancelled": "Прием уже отменен.",
+      "appointmentCompletedCannotCancel": "Завершенную запись на прием нельзя отменить.",
+      "appointmentAlreadyCompletedCannotCancel": "Завершенную запись на прием нельзя отменить.",
+      "cannotCancelOthersAppointment": "Вы можете отменять только свои записи на прием."
     }
   },
   "prescriptions": {

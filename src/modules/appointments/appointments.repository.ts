@@ -150,6 +150,19 @@ export class AppointmentsRepository {
     })
   }
 
+  async markAsCancelled(executor: PrismaExecutor, appointment_id: string, actor_id?: string) {
+    return executor.appointment.update({
+      where: {
+        id: appointment_id
+      },
+      data: {
+        status: AppointmentStatus.CANCELLED,
+        cancelled_at: new Date(),
+        updated_by: actor_id ?? null
+      }
+    })
+  }
+
   private buildWhere(query: Omit<AppointmentsFindAllDto, "page" | "limit">) {
     return {
       deleted_at: null,
