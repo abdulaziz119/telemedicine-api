@@ -12,6 +12,7 @@ Asosiy imkoniyatlar:
 - `GET /prescriptions/find-all` va `GET /prescriptions/get-one/:id`
 - `POST /appointments` orqali qabulga yozilish
 - `PUT /appointments/:id/complete` orqali qabulni yakunlash
+- `PUT /appointments/:id/cancel` orqali qabulni bekor qilish
 - `POST /appointments/:id/prescription` orqali retsept berish
 
 ## Ishlatilgan stack
@@ -110,7 +111,8 @@ Authz qoidalari:
 - doctor faqat o'zi uchun appointment'ni yakunlay oladi
 - doctor faqat o'zi nomidan prescription yoza oladi
 - appointment va prescription list/get-one route'lari faqat joriy userga tegishli yozuvlarni qaytaradi
-- `users` route'lari faqat joriy userni ko'rsatadi
+- `PUT /appointments/:id/cancel` faqat qabulga biriktirilgan shifokor yoki bemor tomonidan bajarilishi mumkin
+- `users` route'lari barcha aktiv foydalanuvchilarni ko'rish imkonini beradi
 
 ## Multilingual JSON fieldlar
 
@@ -372,7 +374,13 @@ Body:
 }
 ```
 
-### 6. Prescription create
+### 6. Appointment cancel
+
+`PUT /appointments/:id/cancel`
+
+Authz qoidasi: faqat qabulga biriktirilgan shifokor yoki bemor bekor qila oladi.
+
+### 7. Prescription create
 
 `POST /appointments/:id/prescription`
 
