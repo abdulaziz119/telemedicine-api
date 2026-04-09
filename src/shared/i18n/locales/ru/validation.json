@@ -1,0 +1,70 @@
+{
+  "common": {
+    "dto": {
+      "validationFailed": "Ошибка валидации запроса.",
+      "requiredField": "Обязательное поле не заполнено.",
+      "invalidInput": "Передано некорректное значение.",
+      "invalidDate": "Неверный формат даты.",
+      "pageInvalid": "Номер страницы должен быть числом не меньше 1.",
+      "limitInvalid": "Лимит должен быть числом не меньше 1.",
+      "limitTooLarge": "Лимит не может быть больше 100.",
+      "stringTooShort": "Текстовое значение слишком короткое.",
+      "arrayTooSmall": "Список должен содержать хотя бы один элемент."
+    }
+  },
+  "auth": {
+    "dto": {
+      "emailRequired": "Email обязателен.",
+      "emailInvalid": "Формат email неверный.",
+      "passwordRequired": "Пароль обязателен."
+    }
+  },
+  "users": {
+    "dto": {
+      "userIdRequired": "Идентификатор пользователя обязателен.",
+      "roleInvalid": "Роль пользователя указана неверно."
+    }
+  },
+  "doctors": {
+    "dto": {
+      "doctorIdRequired": "Идентификатор врача обязателен.",
+      "specializationInvalid": "Значение специализации указано неверно.",
+      "specializationUzRequired": "Узбекское значение специализации обязательно.",
+      "specializationEnRequired": "Английское значение специализации обязательно.",
+      "specializationRuRequired": "Русское значение специализации обязательно."
+    }
+  },
+  "appointments": {
+    "dto": {
+      "appointmentIdRequired": "Идентификатор приема обязателен.",
+      "patientIdRequired": "Идентификатор пациента обязателен.",
+      "doctorIdRequired": "Идентификатор врача обязателен.",
+      "startsAtRequired": "Время начала обязательно.",
+      "startsAtInvalid": "Формат времени начала неверный.",
+      "endsAtRequired": "Время окончания обязательно.",
+      "endsAtInvalid": "Формат времени окончания неверный.",
+      "completeDoctorIdRequired": "Для завершения приема нужен идентификатор врача.",
+      "statusInvalid": "Статус приема указан неверно."
+    }
+  },
+  "prescriptions": {
+    "dto": {
+      "appointmentIdRequired": "Идентификатор приема обязателен.",
+      "prescriptionIdRequired": "Идентификатор рецепта обязателен.",
+      "doctorIdRequired": "Идентификатор врача обязателен.",
+      "patientIdRequired": "Идентификатор пациента обязателен.",
+      "itemsRequired": "Нужно указать хотя бы один препарат.",
+      "medicationNameRequired": "Название препарата обязательно.",
+      "medicationNameUzRequired": "Узбекское название препарата обязательно.",
+      "medicationNameEnRequired": "Английское название препарата обязательно.",
+      "medicationNameRuRequired": "Русское название препарата обязательно.",
+      "dosageRequired": "Информация о дозировке обязательна.",
+      "dosageUzRequired": "Узбекское значение дозировки обязательно.",
+      "dosageEnRequired": "Английское значение дозировки обязательно.",
+      "dosageRuRequired": "Русское значение дозировки обязательно.",
+      "instructionsUzRequired": "Узбекское значение инструкции обязательно.",
+      "instructionsEnRequired": "Английское значение инструкции обязательно.",
+      "instructionsRuRequired": "Русское значение инструкции обязательно."
+    }
+  }
+}

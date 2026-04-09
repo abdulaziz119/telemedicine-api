@@ -1,0 +1,70 @@
+{
+  "common": {
+    "dto": {
+      "validationFailed": "Request validation failed.",
+      "requiredField": "A required field is missing.",
+      "invalidInput": "The provided value is invalid.",
+      "invalidDate": "The date format is invalid.",
+      "pageInvalid": "Page must be a number greater than or equal to 1.",
+      "limitInvalid": "Limit must be a number greater than or equal to 1.",
+      "limitTooLarge": "Limit cannot be greater than 100.",
+      "stringTooShort": "The text value is too short.",
+      "arrayTooSmall": "At least one item is required."
+    }
+  },
+  "auth": {
+    "dto": {
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Email format is invalid.",
+      "passwordRequired": "Password is required."
+    }
+  },
+  "users": {
+    "dto": {
+      "userIdRequired": "User identifier is required.",
+      "roleInvalid": "User role is invalid."
+    }
+  },
+  "doctors": {
+    "dto": {
+      "doctorIdRequired": "Doctor identifier is required.",
+      "specializationInvalid": "Specialization value is invalid.",
+      "specializationUzRequired": "Uzbek specialization value is required.",
+      "specializationEnRequired": "English specialization value is required.",
+      "specializationRuRequired": "Russian specialization value is required."
+    }
+  },
+  "appointments": {
+    "dto": {
+      "appointmentIdRequired": "Appointment identifier is required.",
+      "patientIdRequired": "Patient identifier is required.",
+      "doctorIdRequired": "Doctor identifier is required.",
+      "startsAtRequired": "Start time is required.",
+      "startsAtInvalid": "Start time has an invalid format.",
+      "endsAtRequired": "End time is required.",
+      "endsAtInvalid": "End time has an invalid format.",
+      "completeDoctorIdRequired": "Doctor identifier is required to complete the appointment.",
+      "statusInvalid": "Appointment status is invalid."
+    }
+  },
+  "prescriptions": {
+    "dto": {
+      "appointmentIdRequired": "Appointment identifier is required.",
+      "prescriptionIdRequired": "Prescription identifier is required.",
+      "doctorIdRequired": "Doctor identifier is required.",
+      "patientIdRequired": "Patient identifier is required.",
+      "itemsRequired": "At least one medication item is required.",
+      "medicationNameRequired": "Medication name is required.",
+      "medicationNameUzRequired": "Uzbek medication name is required.",
+      "medicationNameEnRequired": "English medication name is required.",
+      "medicationNameRuRequired": "Russian medication name is required.",
+      "dosageRequired": "Dosage is required.",
+      "dosageUzRequired": "Uzbek dosage value is required.",
+      "dosageEnRequired": "English dosage value is required.",
+      "dosageRuRequired": "Russian dosage value is required.",
+      "instructionsUzRequired": "Uzbek instructions value is required.",
+      "instructionsEnRequired": "English instructions value is required.",
+      "instructionsRuRequired": "Russian instructions value is required."
+    }
+  }
+}

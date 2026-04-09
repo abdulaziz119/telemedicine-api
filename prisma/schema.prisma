@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  DOCTOR
+  PATIENT
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id                       String         @id @default(cuid())
+  email                    String         @unique
+  full_name                String
+  role                     UserRole
+  password_hash            String?
+  created_by               String?
+  updated_by               String?
+  created_at               DateTime       @default(now())
+  updated_at               DateTime       @updatedAt
+  deleted_at               DateTime?
+  doctor_profile           DoctorProfile?
+  appointments_as_doctor   Appointment[]  @relation("DoctorAppointments")
+  appointments_as_patient  Appointment[]  @relation("PatientAppointments")
+  prescriptions_as_doctor  Prescription[] @relation("DoctorPrescriptions")
+  prescriptions_as_patient Prescription[] @relation("PatientPrescriptions")
+
+  @@map("users")
+}
+
+model DoctorProfile {
+  id               String    @id @default(cuid())
+  user_id          String    @unique
+  specialization   Json
+  consultation_fee Int
+  created_by       String?
+  updated_by       String?
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @updatedAt
+  deleted_at       DateTime?
+  user             User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("doctor_profiles")
+}
+
+model Appointment {
+  id           String            @id @default(cuid())
+  doctor_id    String
+  patient_id   String
+  starts_at    DateTime
+  ends_at      DateTime
+  status       AppointmentStatus @default(SCHEDULED)
+  completed_at DateTime?
+  cancelled_at DateTime?
+  created_by   String?
+  updated_by   String?
+  created_at   DateTime          @default(now())
+  updated_at   DateTime          @updatedAt
+  deleted_at   DateTime?
+  doctor       User              @relation("DoctorAppointments", fields: [doctor_id], references: [id], onDelete: Restrict)
+  patient      User              @relation("PatientAppointments", fields: [patient_id], references: [id], onDelete: Restrict)
+  prescription Prescription?
+
+  @@index([doctor_id, starts_at, ends_at])
+  @@index([patient_id, starts_at])
+  @@index([status])
+  @@map("appointments")
+}
+
+model Prescription {
+  id             String             @id @default(cuid())
+  appointment_id String             @unique
+  patient_id     String
+  doctor_id      String
+  issued_at      DateTime           @default(now())
+  created_by     String?
+  updated_by     String?
+  created_at     DateTime           @default(now())
+  updated_at     DateTime           @updatedAt
+  deleted_at     DateTime?
+  appointment    Appointment        @relation(fields: [appointment_id], references: [id], onDelete: Cascade)
+  patient        User               @relation("PatientPrescriptions", fields: [patient_id], references: [id], onDelete: Restrict)
+  doctor         User               @relation("DoctorPrescriptions", fields: [doctor_id], references: [id], onDelete: Restrict)
+  items          PrescriptionItem[]
+
+  @@map("prescriptions")
+}
+
+model PrescriptionItem {
+  id              String       @id @default(cuid())
+  prescription_id String
+  medication_name Json
+  dosage          Json
+  instructions    Json?
+  created_by      String?
+  updated_by      String?
+  created_at      DateTime     @default(now())
+  updated_at      DateTime     @updatedAt
+  deleted_at      DateTime?
+  prescription    Prescription @relation(fields: [prescription_id], references: [id], onDelete: Cascade)
+
+  @@index([prescription_id])
+  @@map("prescription_items")
+}

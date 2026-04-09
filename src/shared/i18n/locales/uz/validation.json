@@ -1,0 +1,70 @@
+{
+  "common": {
+    "dto": {
+      "validationFailed": "So'rov ma'lumotlarini tekshirishda xatolik yuz berdi.",
+      "requiredField": "Majburiy maydon to'ldirilmagan.",
+      "invalidInput": "Kiritilgan qiymat noto'g'ri.",
+      "invalidDate": "Sana formati noto'g'ri.",
+      "pageInvalid": "Sahifa raqami 1 yoki undan katta son bo'lishi kerak.",
+      "limitInvalid": "Limit 1 yoki undan katta son bo'lishi kerak.",
+      "limitTooLarge": "Limit 100 dan katta bo'lishi mumkin emas.",
+      "stringTooShort": "Matn qiymati juda qisqa.",
+      "arrayTooSmall": "Ro'yxatda kamida bitta element bo'lishi kerak."
+    }
+  },
+  "auth": {
+    "dto": {
+      "emailRequired": "Email majburiy.",
+      "emailInvalid": "Email formati noto'g'ri.",
+      "passwordRequired": "Parol majburiy."
+    }
+  },
+  "users": {
+    "dto": {
+      "userIdRequired": "Foydalanuvchi identifikatori majburiy.",
+      "roleInvalid": "Foydalanuvchi roli noto'g'ri."
+    }
+  },
+  "doctors": {
+    "dto": {
+      "doctorIdRequired": "Shifokor identifikatori majburiy.",
+      "specializationInvalid": "Mutaxassislik qiymati noto'g'ri.",
+      "specializationUzRequired": "Mutaxassislikning o'zbekcha qiymati majburiy.",
+      "specializationEnRequired": "Mutaxassislikning inglizcha qiymati majburiy.",
+      "specializationRuRequired": "Mutaxassislikning ruscha qiymati majburiy."
+    }
+  },
+  "appointments": {
+    "dto": {
+      "appointmentIdRequired": "Qabul identifikatori majburiy.",
+      "patientIdRequired": "Bemor identifikatori majburiy.",
+      "doctorIdRequired": "Shifokor identifikatori majburiy.",
+      "startsAtRequired": "Boshlanish vaqti majburiy.",
+      "startsAtInvalid": "Boshlanish vaqti noto'g'ri formatda.",
+      "endsAtRequired": "Tugash vaqti majburiy.",
+      "endsAtInvalid": "Tugash vaqti noto'g'ri formatda.",
+      "completeDoctorIdRequired": "Qabulni yakunlash uchun shifokor identifikatori majburiy.",
+      "statusInvalid": "Qabul statusi noto'g'ri."
+    }
+  },
+  "prescriptions": {
+    "dto": {
+      "appointmentIdRequired": "Qabul identifikatori majburiy.",
+      "prescriptionIdRequired": "Retsept identifikatori majburiy.",
+      "doctorIdRequired": "Shifokor identifikatori majburiy.",
+      "patientIdRequired": "Bemor identifikatori majburiy.",
+      "itemsRequired": "Kamida bitta dori yozilishi kerak.",
+      "medicationNameRequired": "Dori nomi majburiy.",
+      "medicationNameUzRequired": "Dori nomining o'zbekcha qiymati majburiy.",
+      "medicationNameEnRequired": "Dori nomining inglizcha qiymati majburiy.",
+      "medicationNameRuRequired": "Dori nomining ruscha qiymati majburiy.",
+      "dosageRequired": "Dozalash ma'lumoti majburiy.",
+      "dosageUzRequired": "Dozalashning o'zbekcha qiymati majburiy.",
+      "dosageEnRequired": "Dozalashning inglizcha qiymati majburiy.",
+      "dosageRuRequired": "Dozalashning ruscha qiymati majburiy.",
+      "instructionsUzRequired": "Ko'rsatmaning o'zbekcha qiymati majburiy.",
+      "instructionsEnRequired": "Ko'rsatmaning inglizcha qiymati majburiy.",
+      "instructionsRuRequired": "Ko'rsatmaning ruscha qiymati majburiy."
+    }
+  }
+}

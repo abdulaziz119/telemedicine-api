@@ -1,0 +1,35 @@
+import { FastifyInstance } from "fastify"
+import { StatusCodes } from "http-status-codes"
+import { AuthService } from "../auth/auth.service"
+import { getRequestLanguage } from "../../shared/http/request-language"
+import { parseDto } from "../../shared/http/validation"
+import { usersFindAllDto, usersGetOneDto } from "./dto/users.dto"
+
+import { UsersService } from "./users.service"
+
+export class UsersController {
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly authService: AuthService
+  ) { }
+
+  registerRoutes(app: FastifyInstance): void {
+    app.get("/users/find-all", async (request, reply) => {
+      const currentUser = await this.authService.authenticateRequest(request)
+      const query = parseDto(usersFindAllDto, request.query)
+      const users = await this.usersService.findAll(query, getRequestLanguage(request), currentUser)
+
+      return reply.status(StatusCodes.OK).send(users)
+    })
+
+    app.get("/users/get-one/:id", async (request, reply) => {
+      const currentUser = await this.authService.authenticateRequest(request)
+      const params = parseDto(usersGetOneDto, request.params)
+      const user = await this.usersService.getOne(params.id, getRequestLanguage(request), currentUser)
+
+      return reply.status(StatusCodes.OK).send({
+        data: user
+      })
+    })
+  }
+}

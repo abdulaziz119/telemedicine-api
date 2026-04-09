@@ -1,0 +1,53 @@
+{
+  "common": {
+    "http": {
+      "routeNotFound": "So'ralgan route topilmadi.",
+      "resourceAlreadyExists": "Bunday ma'lumot allaqachon mavjud.",
+      "requestActorNotFound": "So'rovni bajargan foydalanuvchi topilmadi.",
+      "concurrentConflict": "Bir vaqtning o'zida zid so'rov bo'ldi. Qayta urinib ko'ring.",
+      "internalServerError": "Ichki server xatoligi yuz berdi."
+    }
+  },
+  "auth": {
+    "service": {
+      "authRequired": "Bu amal uchun tizimga kirish talab qilinadi.",
+      "invalidAuthToken": "Avtorizatsiya tokeni noto'g'ri yoki muddati tugagan.",
+      "invalidCredentials": "Email yoki parol noto'g'ri.",
+      "onlyDoctorsAllowed": "Bu amalni faqat shifokor bajarishi mumkin.",
+      "onlyPatientsAllowed": "Bu amalni faqat bemor bajarishi mumkin.",
+      "doctorIdForbidden": "Shifokor boshqa shifokor nomidan amal bajara olmaydi.",
+      "patientIdForbidden": "Bemor boshqa bemor nomidan amal bajara olmaydi."
+    }
+  },
+  "users": {
+    "service": {
+      "userNotFound": "Foydalanuvchi topilmadi.",
+      "doctorNotFound": "Shifokor topilmadi.",
+      "patientNotFound": "Bemor topilmadi."
+    }
+  },
+  "doctors": {
+    "service": {
+      "doctorNotFound": "Shifokor topilmadi."
+    }
+  },
+  "appointments": {
+    "service": {
+      "appointmentNotFound": "Qabul topilmadi.",
+      "appointmentNotFoundForDoctor": "Bu shifokor uchun qabul topilmadi.",
+      "appointmentInPast": "O'tgan vaqtga qabul yozib bo'lmaydi.",
+      "appointmentInvalidRange": "Qabul tugash vaqti boshlanish vaqtidan katta bo'lishi kerak.",
+      "appointmentSlotBusy": "Tanlangan vaqt band.",
+      "appointmentPatientBusy": "Bemor tanlangan vaqtda boshqa qabulga yozilgan.",
+      "appointmentAlreadyCompleted": "Qabul allaqachon yakunlangan.",
+      "appointmentCancelledCannotComplete": "Bekor qilingan qabulni yakunlab bo'lmaydi."
+    }
+  },
+  "prescriptions": {
+    "service": {
+      "prescriptionNotFound": "Retsept topilmadi.",
+      "prescriptionRequiresCompletedAppointment": "Retsept faqat yakunlangan qabul uchun beriladi.",
+      "prescriptionAlreadyExists": "Bu qabul uchun retsept allaqachon mavjud."
+    }
+  }
+}

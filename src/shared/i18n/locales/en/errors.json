@@ -1,0 +1,53 @@
+{
+  "common": {
+    "http": {
+      "routeNotFound": "Requested route was not found.",
+      "resourceAlreadyExists": "This resource already exists.",
+      "requestActorNotFound": "The request actor was not found.",
+      "concurrentConflict": "A concurrent conflict happened. Please try again.",
+      "internalServerError": "An internal server error occurred."
+    }
+  },
+  "auth": {
+    "service": {
+      "authRequired": "Authentication is required for this action.",
+      "invalidAuthToken": "The authorization token is invalid or expired.",
+      "invalidCredentials": "Email or password is incorrect.",
+      "onlyDoctorsAllowed": "Only doctors can perform this action.",
+      "onlyPatientsAllowed": "Only patients can perform this action.",
+      "doctorIdForbidden": "A doctor cannot act on behalf of another doctor.",
+      "patientIdForbidden": "A patient cannot act on behalf of another patient."
+    }
+  },
+  "users": {
+    "service": {
+      "userNotFound": "User not found.",
+      "doctorNotFound": "Doctor not found.",
+      "patientNotFound": "Patient not found."
+    }
+  },
+  "doctors": {
+    "service": {
+      "doctorNotFound": "Doctor not found."
+    }
+  },
+  "appointments": {
+    "service": {
+      "appointmentNotFound": "Appointment not found.",
+      "appointmentNotFoundForDoctor": "Appointment was not found for this doctor.",
+      "appointmentInPast": "You cannot book an appointment in the past.",
+      "appointmentInvalidRange": "Appointment end time must be greater than the start time.",
+      "appointmentSlotBusy": "The selected time slot is already occupied.",
+      "appointmentPatientBusy": "The patient already has another appointment at this time.",
+      "appointmentAlreadyCompleted": "Appointment is already completed.",
+      "appointmentCancelledCannotComplete": "A cancelled appointment cannot be completed."
+    }
+  },
+  "prescriptions": {
+    "service": {
+      "prescriptionNotFound": "Prescription not found.",
+      "prescriptionRequiresCompletedAppointment": "A prescription can only be issued for a completed appointment.",
+      "prescriptionAlreadyExists": "A prescription already exists for this appointment."
+    }
+  }
+}

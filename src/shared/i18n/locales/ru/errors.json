@@ -1,0 +1,53 @@
+{
+  "common": {
+    "http": {
+      "routeNotFound": "Запрошенный route не найден.",
+      "resourceAlreadyExists": "Такая запись уже существует.",
+      "requestActorNotFound": "Пользователь, выполнивший запрос, не найден.",
+      "concurrentConflict": "Произошел конфликт параллельных запросов. Попробуйте еще раз.",
+      "internalServerError": "Произошла внутренняя ошибка сервера."
+    }
+  },
+  "auth": {
+    "service": {
+      "authRequired": "Для этого действия требуется авторизация.",
+      "invalidAuthToken": "Токен авторизации неверный или просрочен.",
+      "invalidCredentials": "Неверный email или пароль.",
+      "onlyDoctorsAllowed": "Это действие может выполнять только врач.",
+      "onlyPatientsAllowed": "Это действие может выполнять только пациент.",
+      "doctorIdForbidden": "Врач не может действовать от имени другого врача.",
+      "patientIdForbidden": "Пациент не может действовать от имени другого пациента."
+    }
+  },
+  "users": {
+    "service": {
+      "userNotFound": "Пользователь не найден.",
+      "doctorNotFound": "Врач не найден.",
+      "patientNotFound": "Пациент не найден."
+    }
+  },
+  "doctors": {
+    "service": {
+      "doctorNotFound": "Врач не найден."
+    }
+  },
+  "appointments": {
+    "service": {
+      "appointmentNotFound": "Прием не найден.",
+      "appointmentNotFoundForDoctor": "Прием для этого врача не найден.",
+      "appointmentInPast": "Нельзя записаться на прием в прошлое время.",
+      "appointmentInvalidRange": "Время окончания приема должно быть больше времени начала.",
+      "appointmentSlotBusy": "Выбранное время уже занято.",
+      "appointmentPatientBusy": "У пациента уже есть другой прием на это время.",
+      "appointmentAlreadyCompleted": "Прием уже завершен.",
+      "appointmentCancelledCannotComplete": "Отмененный прием нельзя завершить."
+    }
+  },
+  "prescriptions": {
+    "service": {
+      "prescriptionNotFound": "Рецепт не найден.",
+      "prescriptionRequiresCompletedAppointment": "Рецепт можно выдать только для завершенного приема.",
+      "prescriptionAlreadyExists": "Для этого приема рецепт уже существует."
+    }
+  }
+}
