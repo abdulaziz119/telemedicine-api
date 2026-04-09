@@ -1,7 +1,8 @@
 import { StatusCodes } from "http-status-codes"
 import { UsersRepository } from "./users.repository"
 import {UsersFindAllDto} from "./dto";
-import { UserRole, userRoles } from "./users.enum";
+import type { UserSerializerInput } from "./users.interfaces";
+import { userRoles } from "./users.enum";
 import {
   AppError,
   AppLanguage,
@@ -21,7 +22,7 @@ export class UsersService {
       ...(query.role ? { role: query.role } : {})
     })
     const users = user ? [user] : []
-    const total = users.length
+    const total: number = users.length
 
     return {
       data: users.map((user) => this.serializeUser(user, language)),
@@ -77,27 +78,7 @@ export class UsersService {
     return doctor
   }
 
-  private serializeUser(user: {
-    id: string
-    email: string
-    full_name: string
-    role: UserRole
-    created_by: string | null
-    updated_by: string | null
-    created_at: Date
-    updated_at: Date
-    deleted_at: Date | null
-    doctor_profile: {
-      id: string
-      specialization: unknown
-      consultation_fee: number
-      created_by: string | null
-      updated_by: string | null
-      created_at: Date
-      updated_at: Date
-      deleted_at: Date | null
-    } | null
-  }, language: AppLanguage) {
+  private serializeUser(user: UserSerializerInput, language: AppLanguage) {
     return {
       id: user.id,
       email: user.email,

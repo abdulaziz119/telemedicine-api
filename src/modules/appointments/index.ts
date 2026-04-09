@@ -1,4 +1,5 @@
 export * from './dto';
+export * from './appointments.interfaces';
 export * from './appointments.time';
 export * from './appointments.controller';
 export * from './appointments.service';

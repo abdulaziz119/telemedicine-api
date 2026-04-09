@@ -1,4 +1,4 @@
-import { UserRole } from "../users/users.enum"
+import {UserRole} from "../users";
 
 export type AuthenticatedUser = {
   id: string

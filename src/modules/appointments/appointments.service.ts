@@ -1,6 +1,7 @@
 import { AppointmentStatus, Prisma, PrismaClient } from "@prisma/client"
 import { StatusCodes } from "http-status-codes"
 import { AppointmentsRepository } from "./appointments.repository"
+import type { AppointmentSerializerInput } from "./appointments.interfaces"
 import {userRoles, UsersService} from "../users";
 import {AuthenticatedUser, AuthService} from "../auth";
 import {AppointmentsCompleteDto, AppointmentsCreateDto, AppointmentsFindAllDto} from "./dto";
@@ -164,34 +165,7 @@ export class AppointmentsService {
     return this.serializeAppointment(appointment)
   }
 
-  private serializeAppointment(appointment: {
-    id: string
-    doctor_id: string
-    patient_id: string
-    starts_at: Date
-    ends_at: Date
-    status: AppointmentStatus
-    completed_at: Date | null
-    cancelled_at: Date | null
-    created_by: string | null
-    updated_by: string | null
-    created_at: Date
-    updated_at: Date
-    deleted_at: Date | null
-    doctor?: {
-      id: string
-      email: string
-      full_name: string
-    }
-    patient?: {
-      id: string
-      email: string
-      full_name: string
-    }
-    prescription?: {
-      id: string
-    } | null
-  }) {
+  private serializeAppointment(appointment: AppointmentSerializerInput) {
     return {
       id: appointment.id,
       doctor_id: appointment.doctor_id,

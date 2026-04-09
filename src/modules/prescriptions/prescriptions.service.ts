@@ -1,10 +1,10 @@
 import { AppointmentStatus, PrismaClient } from "@prisma/client"
 import { StatusCodes } from "http-status-codes"
 import { PrescriptionsRepository } from "./prescriptions.repository"
+import type { PrescriptionSerializerInput } from "./prescriptions.interfaces"
 import {AppointmentsRepository} from "../appointments";
 import {AuthenticatedUser, AuthService} from "../auth";
 import {PrescriptionsCreateDto, PrescriptionsFindAllDto} from "./dto";
-import { userRoles } from "../users/users.enum";
 import {
   AppError,
   AppLanguage,
@@ -13,6 +13,7 @@ import {
   serializeAuditFields,
   serializeDate
 } from "../../shared";
+import {userRoles} from "../users";
 
 export class PrescriptionsService {
   constructor(
@@ -117,45 +118,7 @@ export class PrescriptionsService {
     return this.serializePrescription(prescription, language)
   }
 
-  private serializePrescription(prescription: {
-    id: string
-    appointment_id: string
-    patient_id: string
-    doctor_id: string
-    issued_at: Date
-    created_by: string | null
-    updated_by: string | null
-    created_at: Date
-    updated_at: Date
-    deleted_at: Date | null
-    items: Array<{
-      id: string
-      medication_name: unknown
-      dosage: unknown
-      instructions: unknown | null
-      created_by: string | null
-      updated_by: string | null
-      created_at: Date
-      updated_at: Date
-      deleted_at: Date | null
-    }>
-    appointment?: {
-      id: string
-      status: AppointmentStatus
-      starts_at: Date
-      ends_at: Date
-    }
-    doctor?: {
-      id: string
-      email: string
-      full_name: string
-    }
-    patient?: {
-      id: string
-      email: string
-      full_name: string
-    }
-  }, language: AppLanguage) {
+  private serializePrescription(prescription: PrescriptionSerializerInput, language: AppLanguage) {
     return {
       id: prescription.id,
       appointment_id: prescription.appointment_id,

@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client"
-import {PrescriptionsCreateDto, PrescriptionsFindAllDto} from "./dto";
+import {PrescriptionsFindAllDto} from "./dto";
+import type { PrescriptionCreateInput } from "./prescriptions.interfaces";
 import {getPaginationParams, PrismaExecutor} from "../../shared";
 
 export class PrescriptionsRepository {
@@ -90,12 +91,7 @@ export class PrescriptionsRepository {
 
   async create(
     executor: PrismaExecutor,
-    data: {
-      appointment_id: string
-      patient_id: string
-      doctor_id: string
-      items: PrescriptionsCreateDto["items"]
-    },
+    data: PrescriptionCreateInput,
     actor_id?: string
   ) {
     return executor.prescription.create({

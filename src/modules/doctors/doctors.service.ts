@@ -1,6 +1,7 @@
 import { StatusCodes } from "http-status-codes"
 import {AppError, AppLanguage, buildPaginationMeta, getLocalizedText, serializeAuditFields} from "../../shared";
 import {DoctorsFindAllDto} from "./dto";
+import type { DoctorSerializerInput } from "./doctors.interfaces";
 import {DoctorsRepository} from "./doctors.repository";
 
 export class DoctorsService {
@@ -29,26 +30,7 @@ export class DoctorsService {
     return this.serializeDoctor(doctor, language)
   }
 
-  private serializeDoctor(doctor: {
-    id: string
-    email: string
-    full_name: string
-    role: string
-    created_by: string | null
-    updated_by: string | null
-    created_at: Date
-    updated_at: Date
-    deleted_at: Date | null
-    doctor_profile: {
-      specialization: unknown
-      consultation_fee: number
-      created_by: string | null
-      updated_by: string | null
-      created_at: Date
-      updated_at: Date
-      deleted_at: Date | null
-    } | null
-  }, language: AppLanguage) {
+  private serializeDoctor(doctor: DoctorSerializerInput, language: AppLanguage) {
     return {
       id: doctor.id,
       email: doctor.email,

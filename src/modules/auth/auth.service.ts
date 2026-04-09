@@ -4,7 +4,8 @@ import { StatusCodes } from "http-status-codes"
 import {AuthLoginDto} from "./dto";
 import {AppError, createAccessToken, env, verifyAccessToken, verifyPassword} from "../../shared";
 import {AuthenticatedUser} from "./auth.types";
-import { UserRole, userRoles } from "../users/users.enum";
+import type { AuthUserRecord } from "./auth.interfaces";
+import {userRoles} from "../users";
 
 function getBearerToken(request: FastifyRequest) {
   const authorizationHeader = request.headers.authorization
@@ -139,12 +140,7 @@ export class AuthService {
     }
   }
 
-  private serializeAuthenticatedUser(user: {
-    id: string
-    email: string
-    full_name: string
-    role: UserRole
-  }): AuthenticatedUser {
+  private serializeAuthenticatedUser(user: AuthUserRecord): AuthenticatedUser {
     return {
       id: user.id,
       email: user.email,
