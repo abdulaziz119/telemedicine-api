@@ -1,9 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { AppointmentStatus } from "@prisma/client"
-import {
-  buildScheduledAppointmentConflictWhere,
-  hasAppointmentOverlap
-} from "../../../src/modules/appointments/appointments.time"
+import {buildScheduledAppointmentConflictWhere, hasAppointmentOverlap} from "../../../src/modules";
 
 describe("appointments.time", () => {
   const existingSlot = {

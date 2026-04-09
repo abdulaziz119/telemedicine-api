@@ -1,15 +1,14 @@
 import { describe, expect, it } from "vitest"
-import { AppointmentStatus, PrismaClient } from "@prisma/client"
-import { AppError } from "../../../src/shared/http/app-error"
-import { AppointmentsRepository } from "../../../src/modules/appointments/appointments.repository"
-import { AuthService } from "../../../src/modules/auth/auth.service"
-import { AuthenticatedUser } from "../../../src/modules/auth/auth.types"
-import { PrescriptionsRepository } from "../../../src/modules/prescriptions/prescriptions.repository"
-import { PrescriptionsService } from "../../../src/modules/prescriptions/prescriptions.service"
-import { PrescriptionsCreateDto } from "../../../src/modules/prescriptions/dto/prescriptions.dto"
+import {AppointmentStatus, PrismaClient, UserRole} from "@prisma/client"
 import { StatusCodes } from "http-status-codes"
-import { UserRole, userRoles } from "../../../src/modules/users/users.enum"
-
+import {
+  AppointmentsRepository,
+  AuthenticatedUser,
+  AuthService,
+  PrescriptionsCreateDto, PrescriptionsRepository, PrescriptionsService,
+  userRoles
+} from "../../../src/modules";
+import {AppError} from "../../../src/shared";
 function buildCurrentUser(role: UserRole, overrides: Partial<AuthenticatedUser> = {}): AuthenticatedUser {
   return {
     id: role === userRoles.DOCTOR ? "doctor-1" : "patient-1",

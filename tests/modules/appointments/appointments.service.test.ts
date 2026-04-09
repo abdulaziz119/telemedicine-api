@@ -1,14 +1,14 @@
 import { describe, expect, it } from "vitest"
-import { AppointmentStatus, Prisma, PrismaClient } from "@prisma/client"
+import {AppointmentStatus, Prisma, PrismaClient, UserRole} from "@prisma/client"
 import { StatusCodes } from "http-status-codes"
-import { AppError } from "../../../src/shared/http/app-error"
-import { AppointmentsRepository } from "../../../src/modules/appointments/appointments.repository"
-import { AppointmentsService } from "../../../src/modules/appointments/appointments.service"
-import { AppointmentsCreateDto } from "../../../src/modules/appointments/dto/appointments.dto"
-import { AuthService } from "../../../src/modules/auth/auth.service"
-import { AuthenticatedUser } from "../../../src/modules/auth/auth.types"
-import { UserRole, userRoles } from "../../../src/modules/users/users.enum"
-import { UsersService } from "../../../src/modules/users/users.service"
+import {
+  AppointmentsCreateDto,
+  AppointmentsRepository, AppointmentsService,
+  AuthenticatedUser,
+  AuthService,
+  userRoles, UsersService
+} from "../../../src/modules";
+import {AppError} from "../../../src/shared";
 
 function buildCurrentUser(role: UserRole, overrides: Partial<AuthenticatedUser> = {}): AuthenticatedUser {
   return {

@@ -1,8 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { PrismaClient } from "@prisma/client"
-import { hashPassword } from "../../../src/shared/auth/password"
-import { AuthService } from "../../../src/modules/auth/auth.service"
-import { userRoles } from "../../../src/modules/users/users.enum"
+import {AuthService, userRoles} from "../../../src/modules";
+import {hashPassword} from "../../../src/shared";
 
 function createSubject(storedPasswordHash: string | null) {
   const user = {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { Prisma } from "@prisma/client"
-import { mapPrismaKnownRequestError } from "../../../src/shared/http/error-handler"
+import {mapPrismaKnownRequestError} from "../../../src/shared";
 
 function buildKnownRequestError(
   code: string,
