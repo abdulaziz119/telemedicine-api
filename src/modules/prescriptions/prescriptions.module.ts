@@ -15,8 +15,6 @@ export function buildPrescriptionsModule(
   const controller = new PrescriptionsController(service, authService)
 
   return {
-    repository,
-    service,
     controller
   }
 }

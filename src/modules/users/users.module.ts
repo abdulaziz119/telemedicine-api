@@ -10,7 +10,6 @@ export function buildUsersModule(prisma: PrismaClient, authService: AuthService)
   const controller = new UsersController(service, authService)
 
   return {
-    repository,
     service,
     controller
   }

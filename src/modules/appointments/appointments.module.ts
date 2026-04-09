@@ -12,7 +12,6 @@ export function buildAppointmentsModule(prisma: PrismaClient, usersService: User
 
   return {
     repository,
-    service,
     controller
   }
 }

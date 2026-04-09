@@ -10,8 +10,6 @@ export function buildDoctorsModule(prisma: PrismaClient, authService: AuthServic
   const controller = new DoctorsController(service, authService)
 
   return {
-    repository,
-    service,
     controller
   }
 }
