@@ -1,5 +1,5 @@
 import { createHmac, timingSafeEqual } from "node:crypto"
-import { UserRole, userRoles } from "../../modules/users/users.enum"
+import {UserRole, userRoles} from "../../modules";
 
 type JwtHeader = {
   alg: "HS256"

@@ -1,4 +1,4 @@
-import type { UserRole } from "../users/users.enum"
+import {UserRole} from "../users";
 
 export interface AuthUserRecord {
   id: string

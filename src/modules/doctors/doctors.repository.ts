@@ -1,7 +1,7 @@
 import { Prisma, PrismaClient } from "@prisma/client"
 import {DoctorsFindAllDto} from "./dto";
 import {getPaginationParams} from "../../shared";
-import { userRoles } from "../users/users.enum";
+import {userRoles} from "../users";
 
 export class DoctorsRepository {
 
